@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$',DetailView.as_view(
         context_object_name="notice",
         model=Notice,
-        template_name="letterbox/notice.html"
+        template_name="letterbox/detail.html"
     ), name="letterbox_detail"),
     url(r'^archive/(?P<notice_id>\d+)/$',archive_notice, name='letterbox_archive'),
 )

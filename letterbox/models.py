@@ -30,8 +30,8 @@ class Notice(models.Model):
     sender = models.ForeignKey(User, null=True, related_name="sent_notices", verbose_name=_("sender"))
     subject = models.CharField(_("subject"), max_length=255)
     message = models.TextField(_("message"))
-    created_ts = models.DateTimeField(_("added"), auto_now_add=True)
-    read = models.BooleanField(_("unseen"), default=False)
+    created_ts = models.DateTimeField(_("created"), auto_now_add=True)
+    read = models.BooleanField(_("read"), default=False)
     archived = models.BooleanField(_("archived"), default=False)
 
     objects = NoticeManger()
