@@ -7,7 +7,11 @@ from django.conf import settings
 
 if not settings.configured:
     settings.configure(
-        INSTALLED_APPS=["django.contrib.auth",'django.contrib.contenttypes',"letterbox"],
+        INSTALLED_APPS=[
+            "django.contrib.auth",
+            "django.contrib.contenttypes",
+            "django.contrib.sessions",
+            "letterbox"],
         TEMPLATE_DIRS = [os.path.join(os.path.dirname(os.path.abspath(__file__)),'testtemplates'),],
         ROOT_URLCONF = 'test_urls',
         AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',),

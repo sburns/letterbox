@@ -47,10 +47,9 @@ class ViewTests(TestCase):
         self.client.login(username='joe', password='test')
 
     def test_default(self):
-        
         response = self.client.get('/notices/')
         self.assertIn("notices", response.context)
-        self.assertLen(response.context['notices'], 1)
+        self.assertEqual(len(response.context['notices']), 1)
         assert False
 
     def test_archived(self):
