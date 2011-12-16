@@ -26,6 +26,13 @@ class NoticeListView(ListView):
             return Notice.objects.notices_for(self.request.user, archived=False)
 
 @login_required
+def detail(request, notice_id):
+    notice = get_object_or_404(Notice, pk=notice_id)
+    if not notice.read:
+        notice.is_read()
+    return render(request,"letterbox/detail.html",{"notice":notice})
+
+@login_required
 def notices(request):
     notices = Notice.objects.notices_for(request.user, archived=False)
     return render(request, "letterbox/notices.html",{"notices":notices})
