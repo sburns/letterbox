@@ -40,17 +40,17 @@ def notices(request):
 @login_required
 def all(request):
     notices = Notice.objects.filter(recipient=request.user)
-    return render(request, "letterbox/notices.html",{"notices":notices})
+    return render(request, "letterbox/notices.html",{"notices":notices,"view_type": "all"})
 
 @login_required
 def unread(request):
     notices = Notice.objects.notices_for(request.user, read=False)
-    return render(request, "letterbox/notices.html",{"notices":notices})
+    return render(request, "letterbox/notices.html",{"notices":notices,"view_type": "unread"})
 
 @login_required
 def archived(request):
     notices = Notice.objects.notices_for(request.user, archived=True)
-    return render(request, "letterbox/notices.html",{"notices":notices})
+    return render(request, "letterbox/notices.html",{"notices":notices,"view_type": "archived"})
 
 def archive_notice(request, notice_id):
     notice = get_object_or_404(Notice, pk=notice_id)
