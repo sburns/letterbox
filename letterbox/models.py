@@ -11,8 +11,7 @@ class NoticeManger(models.Manager):
             lookup_kwargs = {"recipient": user}
         qs = self.filter(**lookup_kwargs)
         qs = qs.filter(archived=archived)
-        if read:
-            qs = qs.filter(read=read)
+        qs = qs.filter(read=read)
         return qs
 
     def unread_count_for(self, recipient):
