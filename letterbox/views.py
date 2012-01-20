@@ -34,12 +34,12 @@ def detail(request, notice_id):
 
 @login_required
 def notices(request):
-    notices = Notice.objects.notices_for(request.user, archived=False)
+    notices = Notice.objects.notices_for(request.user, archived=False, read=False)
     return render(request, "letterbox/notices.html",{"notices":notices})
 
 @login_required
 def all(request):
-    notices = Notice.objects.filter(recipient=request.user)
+    notices = Notice.objects.notices_for(request.user)
     return render(request, "letterbox/notices.html",{"notices":notices,"view_type": "all"})
 
 @login_required

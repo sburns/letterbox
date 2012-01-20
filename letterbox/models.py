@@ -4,14 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 
 class NoticeManger(models.Manager):
-    def notices_for(self, user, archived=False, read=False, sent=False):
+    def notices_for(self, user, sent=False, **kwargs):
         if sent:
             lookup_kwargs = {"sender": user}
         else:
             lookup_kwargs = {"recipient": user}
         qs = self.filter(**lookup_kwargs)
-        qs = qs.filter(archived=archived)
-        qs = qs.filter(read=read)
+        if 'archived' in kwargs:
+            qs = qs.filter(archived=kwargs['archived'])
+        if 'read' in kwargs:
+            qs = qs.filter(read=kwargs['read'])
         return qs
 
     def unread_count_for(self, recipient):
