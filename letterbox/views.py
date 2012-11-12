@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import redirect, render
 from django.conf import settings
 from django.contrib import messages
+from django.db.models import Q
 
 if "django.contrib.messages" in settings.INSTALLED_APPS:
     from django.contrib.messages import add_message
@@ -26,7 +27,7 @@ class NoticeListView(ListView):
 
 @login_required
 def detail(request, notice_id):
-    notice = get_object_or_404(Notice, pk=notice_id)
+    notice = get_object_or_404(Notice, Q(pk=notice_id) & (Q(recipient=request.user) | Q(sender=request.user)))
     if not notice.read:
         notice.is_read()
     return render(request,"letterbox/detail.html",{"notice":notice})
