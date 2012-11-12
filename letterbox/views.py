@@ -18,7 +18,6 @@ class NoticeListView(ListView):
     template_name = "letterbox/notices.html"
 
     def get_queryset(self):
-        user = self.request.user
         which = self.kwargs.get('which',None)
         if which:
             pass
